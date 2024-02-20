@@ -28,8 +28,7 @@
   
   <path id="path.mps.ant.path">
     <pathelement location="${artifacts.mps}/lib/ant/lib/ant-mps.jar" />
-    <pathelement location="${artifacts.mps}/lib/jdom.jar" />
-    <pathelement location="${artifacts.mps}/lib/log4j.jar" />
+    <pathelement location="${artifacts.mps}/lib/util.jar" />
   </path>
   
   <target name="assemble" depends="classes, declare-mps-tasks">
@@ -50,11 +49,32 @@
         </extensions>
       </idea-plugin>
     </echoxml>
-    <mkdir dir="${build.layout}/JavaFX/languages" />
-    <mkdir dir="${build.layout}/JavaFX/languages/JavaFX" />
+    <mkdir dir="${build.layout}/JavaFX/lib" />
     <mkdir dir="${build.tmp}/default/JavaFX.jar" />
     <mkdir dir="${build.tmp}/default/JavaFX.jar/META-INF" />
-    <echoxml file="${build.tmp}/default/JavaFX.jar/META-INF/module.xml">
+    <echoxml file="${build.tmp}/default/JavaFX.jar/META-INF/plugin.xml">
+      <idea-plugin xmlns:xi="http://www.w3.org/2001/XInclude">
+        <id>JavaFX</id>
+        <name>JavaFX</name>
+        <version>${javafx.version}</version>
+        <vendor url="https://openjfx.io/">OpenJFX</vendor>
+        <depends>jetbrains.mps.core</depends>
+        <depends>jetbrains.mps.build</depends>
+        <depends>com.intellij.modules.platform</depends>
+        
+        <extensions defaultExtensionNs="com.intellij">
+          <mps.LanguageLibrary dir="/languages" />
+        </extensions>
+      </idea-plugin>
+    </echoxml>
+    <jar destfile="${build.layout}/JavaFX/lib/JavaFX.jar" duplicate="preserve">
+      <fileset dir="${build.tmp}/default/JavaFX.jar" />
+    </jar>
+    <mkdir dir="${build.layout}/JavaFX/languages" />
+    <mkdir dir="${build.layout}/JavaFX/languages/JavaFX" />
+    <mkdir dir="${build.tmp}/default/JavaFX.jar1" />
+    <mkdir dir="${build.tmp}/default/JavaFX.jar1/META-INF" />
+    <echoxml file="${build.tmp}/default/JavaFX.jar1/META-INF/module.xml">
       <module namespace="JavaFX" type="solution" uuid="69f76f19-b3ff-4833-843a-036cd0ceb0d1">
         <dependencies>
           <module ref="6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)" kind="cl" />
@@ -73,7 +93,7 @@
     </echoxml>
     <jar destfile="${build.layout}/JavaFX/languages/JavaFX/JavaFX.jar" duplicate="preserve">
       <zipfileset file="${javafx.home}/solutions/JavaFX/JavaFX.msd" prefix="module" />
-      <fileset dir="${build.tmp}/default/JavaFX.jar" />
+      <fileset dir="${build.tmp}/default/JavaFX.jar1" />
     </jar>
     <mkdir dir="${build.tmp}/default/JavaFX.build.jar" />
     <mkdir dir="${build.tmp}/default/JavaFX.build.jar/META-INF" />
