@@ -8,7 +8,7 @@ import java.time.format.FormatStyle
 buildscript {
     repositories {
         mavenCentral()
-        maven { url 'https://artifacts.itemis.cloud/nexus/content/repositories/mbeddr' }
+        maven { url 'https://artifacts.itemis.cloud/repository/maven-mps/' }
     }
     dependencies {
         classpath 'de.itemis.mps:mps-gradle-plugin:1.18.356.90f1a8c'
@@ -20,25 +20,25 @@ plugins {
     id 'maven-publish'
     id "co.riiid.gradle" version "0.4.2"
 }
-d
+
 def incrementalBuild = !project.hasProperty("disableIncrementalBuild")
 def artifactsDir = new File(buildDir, 'artifacts')
 
 configurations {
     mps
-	languageLibs
+    languageLibs
     junitAnt
 }
 
 dependencies {
     mps "com.jetbrains:mps:2021.1.+"
-	languageLibs "com.mbeddr:mbeddr:2021.1.+"
+    languageLibs "com.mbeddr:platform:2021.1+"
     junitAnt 'org.apache.ant:ant-junit:1.10.6'
 }
 
 repositories {
         maven {
-            url "https://projects.itemis.de/nexus/content/repositories/mbeddr"
+            url "https://artifacts.itemis.cloud/repository/maven-mps/"
         }
 
     mavenCentral()
