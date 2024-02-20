@@ -66,8 +66,8 @@ def pluginVersion = project.findProperty("pluginVersion")
 def defaultScriptArgs = [
         'mps.home'                          : resolveMps.destinationDir,
         'javafx.home'                       : projectDir,
-		'javafx.version'                    : javafxVersion,
-		'plugin.version'                    : pluginVersion,
+	'javafx.version'                    : javafxVersion,
+	'plugin.version'                    : pluginVersion,
         'build.dir'                         : buildDir,
         'mps.generator.skipUnmodifiedModels': incrementalBuild
 ]
