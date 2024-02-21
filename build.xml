@@ -99,6 +99,7 @@
       </module>
     </echoxml>
     <jar destfile="${build.layout}/JavaFX/languages/JavaFX/JavaFX.jar" duplicate="preserve">
+      <fileset dir="${javafx.home}/solutions/JavaFX" includes="icons/**, resources/**" />
       <zipfileset file="${javafx.home}/solutions/JavaFX/JavaFX.msd" prefix="module" />
       <fileset dir="${build.tmp}/default/JavaFX.jar1" />
     </jar>
@@ -121,6 +122,7 @@
     </echoxml>
     <jar destfile="${build.layout}/JavaFX/languages/JavaFX/JavaFX.build.jar" duplicate="preserve">
       <fileset dir="${build.tmp}/java/out/JavaFX.build" />
+      <fileset dir="${javafx.home}/solutions/JavaFX.build" includes="icons/**, resources/**" />
       <fileset dir="${javafx.home}/solutions/JavaFX.build/source_gen" includes="**/trace.info, **/exports, **/*.mps, **/checkpoints" />
       <fileset dir="${build.tmp}/default/JavaFX.build.jar" />
     </jar>
@@ -236,6 +238,7 @@
       <library file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.context.jar" />
       <library file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.core.jar" />
       <library file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.dataFlow.jar" />
+      <library file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.descriptor.jar" />
       <library file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.editor.jar" />
       <library file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.findUsages.jar" />
       <library file="${artifacts.mps}/languages/languageDesign/jetbrains.mps.lang.generator.generationContext.jar" />
