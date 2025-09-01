@@ -8,10 +8,10 @@ import java.time.format.FormatStyle
 buildscript {
     repositories {
         mavenCentral()
-        maven { url 'https://artifacts.itemis.cloud/repository/maven-mps/' }
+        maven { url = 'https://artifacts.itemis.cloud/repository/maven-mps/' }
     }
     dependencies {
-        classpath 'de.itemis.mps:mps-gradle-plugin:1.18.356.90f1a8c'
+        classpath 'de.itemis.mps:mps-gradle-plugin:1.29.3.1.19b70ba'
     }
 }
 
@@ -31,14 +31,14 @@ configurations {
 }
 
 dependencies {
-    mps "com.jetbrains:mps:2022.2.+"
-    languageLibs "com.mbeddr:platform:2022.2+"
-    junitAnt 'org.apache.ant:ant-junit:1.10.6'
+    mps "com.jetbrains:mps:2022.3.+"
+    languageLibs "com.mbeddr:platform:2022.3+"
+    junitAnt 'org.apache.ant:ant-junit:1.10.15'
 }
 
 repositories {
         maven {
-            url "https://artifacts.itemis.cloud/repository/maven-mps/"
+            url = "https://artifacts.itemis.cloud/repository/maven-mps/"
         }
 
     mavenCentral()
@@ -71,14 +71,14 @@ def defaultScriptArgs = [
         'build.dir'                         : buildDir,
         'mps.generator.skipUnmodifiedModels': incrementalBuild
 ]
-def defaultScriptClasspath = project.configurations.junitAnt.fileCollection { true }
+def defaultScriptClasspath = project.configurations.junitAnt.incoming.artifactView { true }.files
 
 // enables https://github.com/mbeddr/mps-gradle-plugin#providing-global-defaults
 ext["itemis.mps.gradle.ant.defaultScriptArgs"] = defaultScriptArgs.collect { "-D$it.key=$it.value".toString() }
 ext["itemis.mps.gradle.ant.defaultScriptClasspath"] = defaultScriptClasspath
 
 task buildLanguages(type: BuildLanguages, dependsOn: [resolveMps, resolveAllLanguageLibs]) {
-    script "build.xml"
+    script = "build.xml"
 }
 
 task packageLanguages(type: Zip, dependsOn: buildLanguages) {
@@ -89,7 +89,7 @@ task packageLanguages(type: Zip, dependsOn: buildLanguages) {
 
 task setup {
     dependsOn resolveAllLanguageLibs
-    description 'Set up MPS project libraries. Libraries are read in from projectlibraries.properties file.'
+    description = 'Set up MPS project libraries. Libraries are read in from projectlibraries.properties file.'
 }
 
 def releaseArtifacts = ["${artifactsDir}/JavaFX/plugin-${javafxVersion}-${pluginVersion}.zip"]
