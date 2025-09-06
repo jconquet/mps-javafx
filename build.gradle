@@ -18,7 +18,7 @@ buildscript {
 plugins {
     id 'base'
     id 'maven-publish'
-    id "co.riiid.gradle" version "0.4.2"
+    id "com.github.breadmoirai.github-release" version "2.5.2"
 }
 
 def incrementalBuild = !project.hasProperty("disableIncrementalBuild")
@@ -94,14 +94,14 @@ task setup {
 
 def releaseArtifacts = ["${artifactsDir}/JavaFX/plugin-${javafxVersion}-${pluginVersion}.zip"]
 
-github {
+githubRelease {
     owner = 'DSLFoundry'
     repo = 'mps-javafx'
     token =  System.getenv().GITHUB_TOKEN != null ? System.getenv().GITHUB_TOKEN : "empty"
     tagName =  "v-$javafxVersion-$pluginVersion"
     targetCommitish = System.getenv().CI_COMMIT_SHA != null ? System.getenv().CI_COMMIT_SHA : "master"
-    name =  "JavaFX stubs v$javafxVersion (plugin v$pluginVersion)"
-    assets = releaseArtifacts
+    releaseName =  "JavaFX stubs v$javafxVersion (plugin v$pluginVersion)"
+    releaseAssets = releaseArtifacts
     // body = ReleaseNotes.getReleaseNotes(file("RELEASE_NOTES.md"))
 }
 
@@ -133,7 +133,9 @@ publishing {
 }
 
 build.dependsOn buildLanguages
-githubRelease.dependsOn build
+tasks.named("githubRelease") {
+    dependsOn("build")
+}
 
 defaultTasks 'buildLanguages'
 
