@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<solution name="JavaFX" uuid="69f76f19-b3ff-4833-843a-036cd0ceb0d1" moduleVersion="0" compileInMPS="true">
+<solution name="JavaFX" uuid="69f76f19-b3ff-4833-843a-036cd0ceb0d1" moduleVersion="0">
   <models>
     <modelRoot contentPath="${module}/lib" type="java_classes">
       <sourceRoot location="javafx.web.jar" />
@@ -15,19 +15,16 @@
   <facets>
     <facet type="java" compile="mps" classes="mps" ext="no">
       <classes generated="true" path="${module}/classes_gen" />
+      <library location="${module}/lib/javafx.web.jar" />
+      <library location="${module}/lib/javafx.controls.jar" />
+      <library location="${module}/lib/javafx-swt.jar" />
+      <library location="${module}/lib/javafx.swing.jar" />
+      <library location="${module}/lib/javafx.base.jar" />
+      <library location="${module}/lib/javafx.media.jar" />
+      <library location="${module}/lib/javafx.fxml.jar" />
+      <library location="${module}/lib/javafx.graphics.jar" />
     </facet>
   </facets>
-  <stubModelEntries>
-    <stubModelEntry path="${module}/lib/javafx.web.jar" />
-    <stubModelEntry path="${module}/lib/javafx.controls.jar" />
-    <stubModelEntry path="${module}/lib/javafx-swt.jar" />
-    <stubModelEntry path="${module}/lib/javafx.swing.jar" />
-    <stubModelEntry path="${module}/lib/javafx.base.jar" />
-    <stubModelEntry path="${module}/lib/javafx.media.jar" />
-    <stubModelEntry path="${module}/lib/javafx.fxml.jar" />
-    <stubModelEntry path="${module}/lib/javafx.graphics.jar" />
-  </stubModelEntries>
-  <sourcePath />
   <dependencies>
     <dependency reexport="false">6354ebe7-c22a-4a0f-ac54-50b52ab9b065(JDK)</dependency>
   </dependencies>
