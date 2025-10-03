@@ -29,7 +29,7 @@
   <path id="path.mps.ant.path">
     <pathelement location="${artifacts.mps}/lib/ant/lib/ant-mps.jar" />
     <fileset dir="${artifacts.mps}/lib">
-      <include name="util.jar" />
+      <include name="util-8.jar" />
     </fileset>
   </path>
   
@@ -94,13 +94,19 @@
         <library jar="../../lib/javafx.media.jar" />
         <library jar="../../lib/javafx.fxml.jar" />
         <library jar="../../lib/javafx.graphics.jar" />
-        <sources jar="." descriptor="JavaFX.msd" />
+        <classpath>
+          <entry path="." />
+        </classpath>
+        <sources jar="JavaFX-src.jar" descriptor="JavaFX.msd" />
       </module>
     </echoxml>
     <jar destfile="${build.layout}/JavaFX/languages/JavaFX/JavaFX.jar" duplicate="preserve">
+      <fileset dir="${build.tmp}/java/out/JavaFX" />
       <fileset dir="${javafx.home}/solutions/JavaFX" includes="icons/**, resources/**" />
-      <zipfileset file="${javafx.home}/solutions/JavaFX/JavaFX.msd" prefix="module" />
       <fileset dir="${build.tmp}/default/JavaFX.jar1" />
+    </jar>
+    <jar destfile="${build.layout}/JavaFX/languages/JavaFX/JavaFX-src.jar" duplicate="preserve">
+      <zipfileset file="${javafx.home}/solutions/JavaFX/JavaFX.msd" prefix="module" />
     </jar>
     <mkdir dir="${build.tmp}/default/JavaFX.build.jar" />
     <mkdir dir="${build.tmp}/default/JavaFX.build.jar/META-INF" />
@@ -186,7 +192,7 @@
     <delete dir="${build.layout}" />
   </target>
   
-  <target name="compileJava" depends="java.compile.JavaFX.build" />
+  <target name="compileJava" depends="java.compile.JavaFX, java.compile.JavaFX.build" />
   
   <target name="processResources" />
   
@@ -273,6 +279,7 @@
       <library file="${artifacts.mps}/languages/runtimes/jetbrains.mps.dataFlow.runtime.jar" />
       <library file="${artifacts.mps}/languages/runtimes/jetbrains.mps.findUsages.runtime.jar" />
       <library file="${artifacts.mps}/languages/runtimes/jetbrains.mps.lang.behavior.api.jar" />
+      <library file="${artifacts.mps}/languages/runtimes/jetbrains.mps.lang.constraints.rules.runtime.jar" />
       <library file="${artifacts.mps}/languages/runtimes/jetbrains.mps.lang.feedback.context.jar" />
       <library file="${artifacts.mps}/languages/runtimes/jetbrains.mps.lang.feedback.problem.legacy-constraints.jar" />
       <library file="${artifacts.mps}/languages/runtimes/jetbrains.mps.lang.feedback.problem.rt.jar" />
@@ -306,6 +313,10 @@
   <target name="declare-mps-tasks" />
   
   <target name="makeDependents" />
+  
+  <target name="java.compile.JavaFX">
+    <mkdir dir="${build.tmp}/java/out/JavaFX" />
+  </target>
   
   <target name="java.compile.JavaFX.build">
     <mkdir dir="${javafx.home}/solutions/JavaFX.build/source_gen" />
