@@ -64,7 +64,7 @@ def pluginVersion = project.findProperty("pluginVersion")
 
 // Default arguments for ant scripts
 def defaultScriptArgs = [
-        'mps.home'                          : resolveMps.destinationDir,
+        'mps_home'                          : resolveMps.destinationDir,
         'javafx.home'                       : projectDir,
 	'javafx.version'                    : javafxVersion,
 	'plugin.version'                    : pluginVersion,

@@ -165,7 +165,7 @@
     <node concept="10PD9b" id="Q9h$0vYOns" role="10PD9s" />
     <node concept="3b7kt6" id="Q9h$0vYOnt" role="10PD9s" />
     <node concept="398rNT" id="Q9h$0vYOnu" role="1l3spd">
-      <property role="TrG5h" value="mps.home" />
+      <property role="TrG5h" value="mps_home" />
     </node>
     <node concept="398rNT" id="6aa2uX208oY" role="1l3spd">
       <property role="TrG5h" value="javafx.home" />
